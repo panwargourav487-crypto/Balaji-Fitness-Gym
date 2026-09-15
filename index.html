@@ -277,8 +277,10 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 
 
 <script>
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let members = JSON.parse(localStorage.getItem("gymMembers") || "[]");
+
 
 function saveData(){
     localStorage.setItem("gymMembers",JSON.stringify(members));
