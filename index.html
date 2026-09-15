@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balaji Fitness Gym</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    color:#222;
+}
+header{
+    background:#111827;
+    color:white;
+    padding:18px;
+    text-align:center;
+}
+header h1{margin:0;font-size:25px}
+header p{margin:6px 0 0;color:#cbd5e1}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+.card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 3px 12px #0001;
+}
+.card h3{margin:0 0 10px;font-size:15px;color:#64748b}
+.card strong{font-size:28px}
+
+.menu{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+button{
+    border:0;
+    border-radius:8px;
+    padding:11px 16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.primary{background:#16a34a;color:white}
+.dark{background:#111827;color:white}
+.red{background:#dc2626;color:white}
+.gray{background:#64748b;color:white}
+
+.section{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin-top:20px;
+    box-shadow:0 3px 12px #0001;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin:7px 0 14px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+}
+
+.formgrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+th,td{
+    padding:12px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+}
+th{background:#f1f5f9}
+
+.badge{
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+.paid{background:#dcfce7;color:#166534}
+.pending{background:#fef3c7;color:#92400e}
+.expired{background:#fee2e2;color:#991b1b}
+
+.search{
+    margin-top:10px;
+}
+
+.hidden{display:none}
+
+@media(max-width:600px){
+    .container{padding:12px}
+    table{font-size:13px}
+    th,td{padding:8px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏋️ Bala Ji Fitness Gym</h1>
+    <p>Rampur Maniharan, Saharanpur (SRE)</p>
+</header>
+
+<div class="container">
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Members</h3>
+            <strong id="totalMembers">0</strong>
+        </div>
+
+        <div class="card">
+            <h3>Active Members</h3>
+            <strong id="activeMembers">0</strong>
+        </div>
+
+        <div class="card">
+            <h3>Expired Members</h3>
+            <strong id="expiredMembers">0</strong>
+        </div>
+
+        <div class="card">
+            <h3>Today's Fees</h3>
+            <strong>₹<span id="todayFees">0</span></strong>
+        </div>
+
+    </div>
+
+    <div class="menu">
+        <button class="primary" onclick="showAdd()">➕ Add Member</button>
+        <button class="dark" onclick="showMembers()">👥 Members</button>
+    </div>
+
+    <div class="section">
+        <h2>⚠️ Expiring Soon</h2>
+        <div id="expiringList">No members found.</div>
+    </div>
+
+</div>
+
+
+<!-- ADD MEMBER -->
+<div id="addSection" class="section hidden">
+
+    <h2>➕ Add New Member</h2>
+
+    <div class="formgrid">
+
+        <div>
+            <label>Member Name</label>
+            <input id="name" placeholder="Enter name">
+        </div>
+
+        <div>
+            <label>Mobile Number</label>
+            <input id="mobile" placeholder="Enter mobile number">
+        </div>
+
+        <div>
+            <label>Address</label>
+            <input id="address" placeholder="Optional">
+        </div>
+
+        <div>
+            <label>Joining Date</label>
+            <input type="date" id="joining">
+        </div>
+
+        <div>
+            <label>Plan</label>
+            <select id="plan">
+                <option value="Monthly">Monthly - ₹500</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Fees</label>
+            <input type="number" id="fees" value="500">
+        </div>
+
+        <div>
+            <label>Start Date</label>
+            <input type="date" id="start">
+        </div>
+
+        <div>
+            <label>Expiry Date</label>
+            <input type="date" id="expiry">
+        </div>
+
+        <div>
+            <label>Payment Status</label>
+            <select id="status">
+                <option value="Paid">Paid</option>
+                <option value="Pending">Pending</option>
+            </select>
+        </div>
+
+    </div>
+
+    <button class="primary" onclick="addMember()">💾 Save Member</button>
+    <button class="gray" onclick="showDashboard()">Back</button>
+
+</div>
+
+
+<!-- MEMBERS -->
+<div id="membersSection" class="section hidden">
+
+    <h2>👥 All Members</h2>
+
+    <input class="search" id="search"
+           onkeyup="displayMembers()"
+           placeholder="🔎 Search by name, mobile or Member ID">
+
+    <div style="overflow-x:auto">
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Plan</th>
+                <th>Fees</th>
+                <th>Expiry</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="memberTable"></tbody>
+
+    </table>
+
+    </div>
+
+    <br>
+    <button class="gray" onclick="showDashboard()">Back</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+let members = JSON.parse(localStorage.getItem("gymMembers") || "[]");
+
+function saveData(){
+    localStorage.setItem("gymMembers",JSON.stringify(members));
+}
+
+function showDashboard(){
+    document.getElementById("dashboard").classList.remove("hidden");
+    document.getElementById("addSection").classList.add("hidden");
+    document.getElementById("membersSection").classList.add("hidden");
+    updateDashboard();
+}
+
+function showAdd(){
+    document.getElementById("dashboard").classList.add("hidden");
+    document.getElementById("addSection").classList.remove("hidden");
+    document.getElementById("membersSection").classList.add("hidden");
+
+    let today=new Date().toISOString().split("T")[0];
+
+    document.getElementById("joining").value=today;
+    document.getElementById("start").value=today;
+}
+
+function showMembers(){
+    document.getElementById("dashboard").classList.add("hidden");
+    document.getElementById("addSection").classList.add("hidden");
+    document.getElementById("membersSection").classList.remove("hidden");
+
+    displayMembers();
+}
+
+function addMember(){
+
+    let name=document.getElementById("name").value.trim();
+    let mobile=document.getElementById("mobile").value.trim();
+
+    if(!name || !mobile){
+        alert("Please enter Name and Mobile Number");
+        return;
+    }
+
+    let member={
+        id:"BG"+String(members.length+1).padStart(4,"0"),
+        name:name,
+        mobile:mobile,
+        address:document.getElementById("address").value,
+        joining:document.getElementById("joining").value,
+        plan:document.getElementById("plan").value,
+        fees:Number(document.getElementById("fees").value),
+        start:document.getElementById("start").value,
+        expiry:document.getElementById("expiry").value,
+        status:document.getElementById("status").value
+    };
+
+    members.push(member);
+    saveData();
+
+    alert("✅ Member Added Successfully!");
+
+    document.getElementById("name").value="";
+    document.getElementById("mobile").value="";
+    document.getElementById("address").value="";
+
+    showMembers();
+}
+
+
+function displayMembers(){
+
+    let search=document.getElementById("search").value.toLowerCase();
+
+    let filtered=members.filter(m =>
+        m.name.toLowerCase().includes(search) ||
+        m.mobile.includes(search) ||
+        m.id.toLowerCase().includes(search)
+    );
+
+    let html="";
+
+    filtered.forEach(m=>{
+
+        let status=getStatus(m);
+
+        html+=`
+        <tr>
+            <td>${m.id}</td>
+            <td>${m.name}</td>
+            <td>${m.mobile}</td>
+            <td>${m.plan}</td>
+            <td>₹${m.fees}</td>
+            <td>${m.expiry || "-"}</td>
+            <td>
+                <span class="badge ${status.toLowerCase()}">
+                    ${status}
+                </span>
+            </td>
+            <td>
+                <button class="red" onclick="deleteMember('${m.id}')">
+                    Delete
+                </button>
+            </td>
+        </tr>`;
+    });
+
+    document.getElementById("memberTable").innerHTML=
+        html || `<tr><td colspan="8">No members found</td></tr>`;
+}
+
+
+function getStatus(m){
+
+    if(m.status==="Pending") return "Pending";
+
+    if(!m.expiry) return "Paid";
+
+    let today=new Date();
+    today.setHours(0,0,0,0);
+
+    let exp=new Date(m.expiry);
+    exp.setHours(0,0,0,0);
+
+    let diff=Math.ceil((exp-today)/(1000*60*60*24));
+
+    if(diff<0) return "Expired";
+    if(diff<=7) return "Expiring Soon";
+
+    return "Paid";
+}
+
+
+function deleteMember(id){
+
+    if(confirm("Delete this member?")){
+
+        members=members.filter(m=>m.id!==id);
+
+        saveData();
+        displayMembers();
+        updateDashboard();
+    }
+}
+
+
+function updateDashboard(){
+
+    document.getElementById("totalMembers").innerText=members.length;
+
+    let active=members.filter(m=>getStatus(m)!=="Expired").length;
+
+    let expired=members.filter(m=>getStatus(m)==="Expired").length;
+
+    document.getElementById("activeMembers").innerText=active;
+    document.getElementById("expiredMembers").innerText=expired;
+
+    let today=new Date().toISOString().split("T")[0];
+
+    let todayFees=members
+        .filter(m=>m.start===today && m.status==="Paid")
+        .reduce((sum,m)=>sum+Number(m.fees),0);
+
+    document.getElementById("todayFees").innerText=todayFees;
+
+    let expiring=members.filter(m=>getStatus(m)==="Expiring Soon");
+
+    if(expiring.length===0){
+
+        document.getElementById("expiringList").innerText=
+            "No members expiring soon.";
+
+    }else{
+
+        document.getElementById("expiringList").innerHTML=
+            expiring.map(m=>
+                `🔔 <b>${m.name}</b> — Expiry: ${m.expiry}`
+            ).join("<br>");
+    }
+}
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>
