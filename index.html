@@ -414,7 +414,7 @@ function displayMembers(){
 async function loadMembers(){
 
     const { data, error } = await supabaseClient
-        .from("members")
+        .from("Members")
         .select("*")
         .order("id", { ascending: true });
 
