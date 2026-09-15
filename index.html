@@ -127,7 +127,7 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 
 <header>
     <h1>🏋️ Bala Ji Fitness Gym</h1>
-    <p>Rampur Maniharan, Saharanpur (SRE)</p>
+    <p>Rampur Maniharan, Saharanpur (UP)</p>
 </header>
 
 <div class="container">
@@ -338,7 +338,7 @@ async function addMember(){
     };
 
     const { data, error } = await supabaseClient
-        .from("members")
+        .from("Members")
         .insert([member])
         .select();
 
