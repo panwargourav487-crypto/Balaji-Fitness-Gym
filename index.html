@@ -411,7 +411,34 @@ function displayMembers(){
     document.getElementById("memberTable").innerHTML=
         html || `<tr><td colspan="8">No members found</td></tr>`;
 }
+async function loadMembers(){
 
+    const { data, error } = await supabaseClient
+        .from("members")
+        .select("*")
+        .order("id", { ascending: true });
+
+    if(error){
+        console.error(error);
+        alert("❌ Members load nahi hue: " + error.message);
+        return;
+    }
+
+    members = data.map(m => ({
+        id: m.member_id,
+        name: m.Name,
+        mobile: m.Mobile,
+        address: m.address || "",
+        joining: m["Joining Date"],
+        plan: m.Plan,
+        fees: Number(m.Fees),
+        start: m["Joining Date"],
+        expiry: m["expiry date"],
+        status: m.status || m["payment status"]
+    }));
+
+    displayMembers();
+}
 
 function getStatus(m){
 
@@ -483,6 +510,7 @@ function updateDashboard(){
 }
 
 updateDashboard();
+    loadMembers();
 
 </script>
 
