@@ -312,7 +312,7 @@ function showMembers(){
     displayMembers();
 }
 
-function addMember(){
+async function addMember(){
 
     let name=document.getElementById("name").value.trim();
     let mobile=document.getElementById("mobile").value.trim();
@@ -322,23 +322,46 @@ function addMember(){
         return;
     }
 
+    let memberId="BG"+String(members.length+1).padStart(4,"0");
+
     let member={
-        id:"BG"+String(members.length+1).padStart(4,"0"),
+        member_id:memberId,
+        Name:name,
+        Mobile:mobile,
+        address:document.getElementById("address").value,
+        "Joining Date":document.getElementById("joining").value,
+        Plan:document.getElementById("plan").value,
+        Fees:Number(document.getElementById("fees").value),
+        "payment status":document.getElementById("status").value,
+        "expiry date":document.getElementById("expiry").value,
+        status:document.getElementById("status").value
+    };
+
+    const { data, error } = await supabaseClient
+        .from("members")
+        .insert([member])
+        .select();
+
+    if(error){
+        console.error(error);
+        alert("❌ Member save nahi hua: " + error.message);
+        return;
+    }
+
+    alert("✅ Member Added Successfully!");
+
+    members.push({
+        id:memberId,
         name:name,
         mobile:mobile,
         address:document.getElementById("address").value,
         joining:document.getElementById("joining").value,
         plan:document.getElementById("plan").value,
         fees:Number(document.getElementById("fees").value),
-        start:document.getElementById("start").value,
+        start:document.getElementById("joining").value,
         expiry:document.getElementById("expiry").value,
         status:document.getElementById("status").value
-    };
-
-    members.push(member);
-    saveData();
-
-    alert("✅ Member Added Successfully!");
+    });
 
     document.getElementById("name").value="";
     document.getElementById("mobile").value="";
