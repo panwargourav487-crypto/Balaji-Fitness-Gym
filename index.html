@@ -132,6 +132,17 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 
     <button onclick="adminLogin()">Login</button>
 </div>
+    <script>
+async function adminLogout(){
+
+    await supabaseClient.auth.signOut();
+
+    document.getElementById("loginBox").style.display = "block";
+    document.querySelector(".container").style.display = "none";
+
+    alert("✅ Logout successful!");
+}
+</script>
 
 <header>
     <h1>🏋️ Bala Ji Fitness Gym</h1>
