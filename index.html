@@ -364,7 +364,7 @@ function showAdd(){
 
     let today=new Date().toISOString().split("T")[0];
 
-    document.getElementById("joining").value=today;
+    document.getElementById("start").value=today;
     document.getElementById("start").value=today;
 }
 
@@ -387,7 +387,7 @@ async function addMember(){
     }
 
     let address=document.getElementById("address").value;
-    let joining=document.getElementById("joining").value;
+    let joining=document.getElementById("start").value;
     let plan=document.getElementById("plan").value;
     let fees=Number(document.getElementById("fees").value);
     let expiry=document.getElementById("expiry").value;
@@ -627,7 +627,7 @@ function getStatus(m){
     document.getElementById("name").value = member.name || "";
     document.getElementById("mobile").value = member.mobile || "";
     document.getElementById("address").value = member.address || "";
-    document.getElementById("joining").value = member.joining || "";
+    document.getElementById("start").value = member.joining || "";
     document.getElementById("plan").value = member.plan || "";
     document.getElementById("fees").value = member.fees || "";
     document.getElementById("expiry").value = member.expiry || "";
