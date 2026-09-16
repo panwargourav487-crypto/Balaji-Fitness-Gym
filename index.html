@@ -366,46 +366,106 @@ async function addMember(){
         return;
     }
 
- let memberId="BG"+String(members.length+1).padStart(4,"0");
+    let address=document.getElementById("address").value;
+    let joining=document.getElementById("joining").value;
+    let plan=document.getElementById("plan").value;
+    let fees=Number(document.getElementById("fees").value);
+    let expiry=document.getElementById("expiry").value;
+    let status=document.getElementById("status").value;
 
-    let member={
-        Member_id:memberId,
-        Name:name,
-        Mobile:mobile,
-        Address:document.getElementById("address").value,
-        "Joining Date":document.getElementById("joining").value,
-        Plan:document.getElementById("plan").value,
-        Fees:Number(document.getElementById("fees").value),
-        "Payment Status":document.getElementById("status").value,
-        "Expiry Date":document.getElementById("expiry").value,
-        Status:document.getElementById("status").value
-    };
+    /* EDIT MEMBER */
+    if(window.editingMemberId){
 
-    const { data, error } = await supabaseClient
-        .from("Member")
-        .insert([member])
-        .select();
+        const { error } = await supabaseClient
+            .from("Member")
+            .update({
+                Name:name,
+                Mobile:mobile,
+                Address:address,
+                "Joining Date":joining,
+                Plan:plan,
+                Fees:fees,
+                "Payment Status":status,
+                "Expiry Date":expiry,
+                Status:status
+            })
+            .eq("Member_id",window.editingMemberId);
 
-    if(error){
-        console.error(error);
-        alert("❌ Member save nahi hua: " + error.message);
-        return;
+        if(error){
+            console.error(error);
+            alert("❌ Member update nahi hua: " + error.message);
+            return;
+        }
+
+        let index=members.findIndex(m => m.id === window.editingMemberId);
+
+        if(index !== -1){
+            members[index]={
+                ...members[index],
+                name:name,
+                mobile:mobile,
+                address:address,
+                joining:joining,
+                plan:plan,
+                fees:fees,
+                start:joining,
+                expiry:expiry,
+                status:status
+            };
+        }
+
+        window.editingMemberId=null;
+
+        saveData();
+        alert("✅ Member Updated Successfully!");
+
+    }else{
+
+        /* NEW MEMBER */
+
+        let memberId="BG"+String(members.length+1).padStart(4,"0");
+
+        let member={
+            Member_id:memberId,
+            Name:name,
+            Mobile:mobile,
+            Address:address,
+            "Joining Date":joining,
+            Plan:plan,
+            Fees:fees,
+            "Payment Status":status,
+            "Expiry Date":expiry,
+            Status:status
+        };
+
+        const { data, error } = await supabaseClient
+            .from("Member")
+            .insert([member])
+            .select();
+
+        if(error){
+            console.error(error);
+            alert("❌ Member save nahi hua: " + error.message);
+            return;
+        }
+
+        members.push({
+            id:memberId,
+            name:name,
+            mobile:mobile,
+            address:address,
+            joining:joining,
+            plan:plan,
+            fees:fees,
+            start:joining,
+            expiry:expiry,
+            status:status
+        });
+
+        saveData();
+
+        alert("✅ Member Added Successfully!");
     }
-
-    alert("✅ Member Added Successfully!");
-
-    members.push({
-        id:memberId,
-        name:name,
-        mobile:mobile,
-        address:document.getElementById("address").value,
-        joining:document.getElementById("joining").value,
-        plan:document.getElementById("plan").value,
-        fees:Number(document.getElementById("fees").value),
-        start:document.getElementById("joining").value,
-        expiry:document.getElementById("expiry").value,
-        status:document.getElementById("status").value
-    });
 
     document.getElementById("name").value="";
     document.getElementById("mobile").value="";
@@ -413,7 +473,6 @@ async function addMember(){
 
     showMembers();
 }
-
 
 function displayMembers(){
 
