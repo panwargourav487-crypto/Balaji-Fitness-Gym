@@ -322,7 +322,7 @@ async function addMember(){
         return;
     }
 
-  let memberId="BG"+Date.now();
+ let memberId="BG"+String(members.length+1).padStart(4,"0");
 
     let member={
         Member_id:memberId,
