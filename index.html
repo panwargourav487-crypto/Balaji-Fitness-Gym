@@ -508,6 +508,9 @@ function displayMembers(){
                 <button class="primary" onclick="editMember('${m.id}')">
                     ✏️ Edit
                 </button>
+                <button class="primary" onclick="sendWhatsApp('${m.mobile}','${m.name}','${m.fees}','${m.expiry}')">
+    💬 WhatsApp
+</button>
 
                 <button class="red" onclick="deleteMember('${m.id}')">
                     Delete
