@@ -334,7 +334,7 @@ async function addMember(){
         Fees:Number(document.getElementById("fees").value),
         "Payment Status":document.getElementById("status").value,
         "Expiry Date":document.getElementById("expiry").value,
-        status:document.getElementById("status").value
+        Status:document.getElementById("status").value
     };
 
     const { data, error } = await supabaseClient
