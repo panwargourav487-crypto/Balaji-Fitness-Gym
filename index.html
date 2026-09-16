@@ -132,15 +132,7 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 
     <button onclick="adminLogin()">Login</button>
 </div>
-async function adminLogout(){
 
-    await supabaseClient.auth.signOut();
-
-    document.getElementById("loginBox").style.display = "block";
-    document.querySelector(".container").style.display = "none";
-
-    alert("✅ Logout successful!");
-}
 
 <header>
     <h1>🏋️ Bala Ji Fitness Gym</h1>
@@ -327,6 +319,15 @@ function saveData(){
     document.querySelector(".container").style.display = "block";
 
     alert("✅ Admin Login Successful!");
+}
+    async function adminLogout(){
+
+    await supabaseClient.auth.signOut();
+
+    document.getElementById("loginBox").style.display = "block";
+    document.querySelector(".container").style.display = "none";
+
+    alert("✅ Logout successful!");
 }
 
 function showDashboard(){
