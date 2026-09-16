@@ -436,6 +436,7 @@ function displayMembers(){
             <td>${m.id}</td>
             <td>${m.name}</td>
             <td>${m.mobile}</td>
+            <td>${m.address || "-"}</td>
             <td>${m.plan}</td>
             <td>₹${m.fees}</td>
             <td>${m.expiry || "-"}</td>
@@ -445,6 +446,10 @@ function displayMembers(){
                 </span>
             </td>
             <td>
+                <button class="primary" onclick="editMember('${m.id}')">
+                    ✏️ Edit
+                </button>
+
                 <button class="red" onclick="deleteMember('${m.id}')">
                     Delete
                 </button>
@@ -453,7 +458,7 @@ function displayMembers(){
     });
 
     document.getElementById("memberTable").innerHTML=
-        html || `<tr><td colspan="8">No members found</td></tr>`;
+        html || `<tr><td colspan="9">No members found</td></tr>`;
 }
 async function loadMembers(){
 
