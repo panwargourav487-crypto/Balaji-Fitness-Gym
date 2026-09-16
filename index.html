@@ -522,6 +522,32 @@ function displayMembers(){
     document.getElementById("memberTable").innerHTML=
         html || `<tr><td colspan="9">No members found</td></tr>`;
 }
+    function sendWhatsApp(mobile,name,fees,expiry){
+
+    let message =
+`Hello ${name} 👋
+
+Bala Ji Fitness Gym ki taraf se reminder:
+
+💰 Fees: ₹${fees}
+📅 Expiry Date: ${expiry}
+
+Agar fees pending hai to please payment kar dein.
+
+Thank You 🙏
+Bala Ji Fitness Gym`;
+
+    let phone = mobile.replace(/\D/g,"");
+
+    if(phone.length === 10){
+        phone = "91" + phone;
+    }
+
+    window.open(
+        "https://wa.me/" + phone + "?text=" + encodeURIComponent(message),
+        "_blank"
+    );
+}
 async function loadMembers(){
 
     const { data, error } = await supabaseClient
