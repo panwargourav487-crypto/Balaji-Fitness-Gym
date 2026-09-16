@@ -486,6 +486,48 @@ async function deleteMember(id){
         updateDashboard();
     }
 }
+    function exportData(){
+
+    if(members.length===0){
+        alert("No members to backup.");
+        return;
+    }
+
+    let rows=[
+        ["Member ID","Name","Mobile","Address","Joining Date","Plan","Fees","Expiry Date","Status"]
+    ];
+
+    members.forEach(m=>{
+        rows.push([
+            m.id,
+            m.name,
+            m.mobile,
+            m.address || "",
+            m.joining || "",
+            m.plan || "",
+            m.fees || 0,
+            m.expiry || "",
+            m.status || ""
+        ]);
+    });
+
+    let csv=rows.map(row =>
+        row.map(value => `"${String(value).replace(/"/g,'""')}"`).join(",")
+    ).join("\n");
+
+    let blob=new Blob(["\ufeff"+csv],{
+        type:"text/csv;charset=utf-8;"
+    });
+
+    let url=URL.createObjectURL(blob);
+    let a=document.createElement("a");
+
+    a.href=url;
+    a.download="Bala-Ji-Fitness-Gym-Backup.csv";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
 
 function updateDashboard(){
 
