@@ -507,6 +507,27 @@ function getStatus(m){
     if(diff<=7) return "Expiring Soon";
 
     return "Paid";
+}function editMember(id){
+
+    let member = members.find(m => m.id === id);
+
+    if(!member){
+        alert("Member not found");
+        return;
+    }
+
+    document.getElementById("name").value = member.name || "";
+    document.getElementById("mobile").value = member.mobile || "";
+    document.getElementById("address").value = member.address || "";
+    document.getElementById("joining").value = member.joining || "";
+    document.getElementById("plan").value = member.plan || "";
+    document.getElementById("fees").value = member.fees || "";
+    document.getElementById("expiry").value = member.expiry || "";
+    document.getElementById("status").value = member.status || "";
+
+    window.editingMemberId = id;
+
+    showAdd();
 }
 
 async function deleteMember(id){
