@@ -460,10 +460,19 @@ function getStatus(m){
     return "Paid";
 }
 
-
-function deleteMember(id){
+async function deleteMember(id){
 
     if(confirm("Delete this member?")){
+
+        const { error } = await supabaseClient
+            .from("Member")
+            .delete()
+            .eq("Member_id", id);
+
+        if(error){
+            alert("❌ Member delete nahi hua: " + error.message);
+            return;
+        }
 
         members=members.filter(m=>m.id!==id);
 
@@ -472,7 +481,6 @@ function deleteMember(id){
         updateDashboard();
     }
 }
-
 
 function updateDashboard(){
 
