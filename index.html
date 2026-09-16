@@ -438,7 +438,7 @@ async function loadMembers(){
         fees: Number(m.Fees),
         start: m["Joining Date"],
         expiry: m["expiry date"],
-        status: m.status || m["payment status"]
+        status: m.Status || m["Payment Status"]
     }));
 
     displayMembers();
