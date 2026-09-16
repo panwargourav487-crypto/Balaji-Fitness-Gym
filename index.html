@@ -156,6 +156,10 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
             <h3>Today's Fees</h3>
             <strong>₹<span id="todayFees">0</span></strong>
         </div>
+        <div class="card">
+    <h3>Pending Fees</h3>
+    <strong>₹<span id="pendingFees">0</span></strong>
+</div>
 
     </div>
 
@@ -500,6 +504,11 @@ function updateDashboard(){
         .reduce((sum,m)=>sum+Number(m.fees),0);
 
     document.getElementById("todayFees").innerText=todayFees;
+    let pendingFees=members
+    .filter(m=>m.status==="Pending")
+    .reduce((sum,m)=>sum+Number(m.fees),0);
+
+document.getElementById("pendingFees").innerText=pendingFees;
 
     let expiring=members.filter(m=>getStatus(m)==="Expiring Soon");
 
