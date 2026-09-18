@@ -109,6 +109,70 @@ th{background:#f1f5f9}
 }
 
 .hidden{display:none}
+    #loginBox{
+    max-width:420px;
+    margin:30px auto;
+    padding:20px;
+    background:#ffffff;
+    border-radius:20px;
+    box-shadow:0 10px 35px #0003;
+    text-align:center;
+    overflow:hidden;
+}
+
+.hanuman-login{
+    width:100%;
+    max-height:360px;
+    object-fit:cover;
+    object-position:center;
+    border-radius:15px;
+    display:block;
+    margin-bottom:18px;
+}
+
+#loginBox h2{
+    margin:5px 0 5px;
+    font-size:24px;
+    color:#111827;
+}
+
+.login-subtitle{
+    margin:0 0 18px;
+    color:#64748b;
+    font-size:14px;
+}
+
+#loginBox input{
+    width:100%;
+    padding:13px;
+    margin:7px 0;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:15px;
+}
+
+#loginBox button{
+    width:100%;
+    margin-top:10px;
+    padding:13px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#f97316,#ea580c);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+    #loginBox{
+        margin:15px;
+        padding:15px;
+        border-radius:18px;
+    }
+
+    .hanuman-login{
+        max-height:320px;
+    }
+}
 
 @media(max-width:600px){
     .container{padding:12px}
@@ -124,13 +188,25 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 </head>
 
 <body>
-    <div id="loginBox">
+<div id="loginBox">
+
+    <img src="Gemini_Generated_Image_26xl6ez6l6ezl.png"
+         class="hanuman-login">
+
     <h2>🔐 Admin Login</h2>
 
-    <input type="email" id="loginEmail" placeholder="Admin Email">
-    <input type="password" id="loginPassword" placeholder="Password">
+    <p class="login-subtitle">Bala Ji Fitness Gym</p>
+
+    <input type="email"
+           id="loginEmail"
+           placeholder="Admin Email">
+
+    <input type="password"
+           id="loginPassword"
+           placeholder="Password">
 
     <button onclick="adminLogin()">Login</button>
+
 </div>
 
 
