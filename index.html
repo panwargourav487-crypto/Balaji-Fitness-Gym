@@ -216,7 +216,7 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 
         <div>
             <label>Plan</label>
-           <select id="plan">
+           <select id="plan" onchange="calculateExpiry()">
     <option value="1">1 Month - ₹500</option>
     <option value="2">2 Months - ₹1000</option>
     <option value="3">3 Months - ₹1500</option>
@@ -231,12 +231,12 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 
         <div>
             <label>Start Date</label>
-            <input type="date" id="start">
+            <input type="date" id="start" onchange="calculateExpiry()">
         </div>
 
         <div>
             <label>Expiry Date</label>
-            <input type="date" id="start" onchange="calculateExpiry()">
+            <input type="date" id="expiry" readonly>
         </div>
 
         <div>
@@ -347,7 +347,7 @@ function showAdd(){
 
     let today=new Date().toISOString().split("T")[0];
 
-    document.getElementById("start").value=today;
+  
     document.getElementById("start").value=today;
 }
 
@@ -638,6 +638,26 @@ function getStatus(m){
     window.editingMemberId = id;
 
     showAdd();
+    function calculateExpiry(){
+
+    let start = document.getElementById("start").value;
+    let plan = document.getElementById("plan").value;
+
+    if(!start || !plan){
+        return;
+    }
+
+    let date = new Date(start + "T00:00:00");
+
+    date.setMonth(date.getMonth() + Number(plan));
+
+    let yyyy = date.getFullYear();
+    let mm = String(date.getMonth() + 1).padStart(2,"0");
+    let dd = String(date.getDate()).padStart(2,"0");
+
+    document.getElementById("expiry").value =
+        `${yyyy}-${mm}-${dd}`;
+}
 }
 
 async function deleteMember(id){
