@@ -358,7 +358,6 @@ function showMembers(){
 
     displayMembers();
 }
-
 async function addMember(){
 
     let name=document.getElementById("name").value.trim();
@@ -373,8 +372,25 @@ async function addMember(){
     let joining=document.getElementById("start").value;
     let plan=document.getElementById("plan").value;
     let fees=Number(document.getElementById("fees").value);
-    let expiry=document.getElementById("expiry").value;
     let status=document.getElementById("status").value;
+
+    if(!joining || !plan){
+        alert("Please select Start Date and Plan");
+        return;
+    }
+
+    /* AUTOMATIC EXPIRY */
+    let date=new Date(joining + "T00:00:00");
+    date.setMonth(date.getMonth() + Number(plan));
+
+    let yyyy=date.getFullYear();
+    let mm=String(date.getMonth()+1).padStart(2,"0");
+    let dd=String(date.getDate()).padStart(2,"0");
+
+    let expiry=`${yyyy}-${mm}-${dd}`;
+
+    document.getElementById("expiry").value=expiry;
+
 
     /* EDIT MEMBER */
     if(window.editingMemberId){
@@ -400,7 +416,9 @@ async function addMember(){
             return;
         }
 
-        let index=members.findIndex(m => m.id === window.editingMemberId);
+        let index=members.findIndex(
+            m => m.id === window.editingMemberId
+        );
 
         if(index !== -1){
             members[index]={
@@ -420,6 +438,7 @@ async function addMember(){
         window.editingMemberId=null;
 
         saveData();
+
         alert("✅ Member Updated Successfully!");
 
     }else{
@@ -476,7 +495,6 @@ async function addMember(){
 
     showMembers();
 }
-
 function displayMembers(){
 
     let search=document.getElementById("search").value.toLowerCase();
