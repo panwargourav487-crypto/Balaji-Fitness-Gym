@@ -181,54 +181,14 @@ th{background:#f1f5f9}
     table{font-size:13px}
     th,td{padding:8px}
 }
-</style>
-    /* GYM PHOTO SLIDESHOW */
+    </style>
 
-.gym-slideshow{
-    width:100%;
-    height:420px;
-    position:relative;
-    overflow:hidden;
-    border-radius:20px;
-    margin-bottom:25px;
-    box-shadow:0 8px 25px #0003;
-}
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
+const SUPABASE_KEY = "sb_publishable_FFGDuxJ9qrHmh_nZpTV1lw_kx_k6GU4";
+</script>
 
-.gym-slide{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:none;
-}
-
-.gym-slide.active{
-    display:block;
-}
-
-.slideshow-title{
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    padding:25px;
-    background:linear-gradient(transparent,#000b);
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-    z-index:2;
-}
-
-@media(max-width:600px){
-    .gym-slideshow{
-        height:240px;
-        border-radius:15px;
-    }
-
-    .slideshow-title{
-        font-size:20px;
-        padding:18px;
-    }
-}
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
 const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
