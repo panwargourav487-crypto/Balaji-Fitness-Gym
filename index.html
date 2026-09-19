@@ -181,6 +181,117 @@ th{background:#f1f5f9}
     table{font-size:13px}
     th,td{padding:8px}
 }
+    /* ===== PROFESSIONAL DASHBOARD DESIGN ===== */
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+/* Header */
+header{
+    background:#0f172a !important;
+    color:white !important;
+    padding:18px 35px !important;
+    box-shadow:0 4px 15px #0003;
+}
+
+header h1{
+    margin:0;
+    font-size:30px;
+    font-weight:700;
+}
+
+header p{
+    margin:5px 0 0;
+    color:#cbd5e1;
+}
+
+/* Main container */
+.container{
+    max-width:1400px !important;
+    margin:auto;
+    padding:30px !important;
+}
+
+/* Dashboard cards */
+#dashboard{
+    width:100%;
+}
+
+#dashboard > div:first-child{
+    background:linear-gradient(135deg,#eff6ff,#f8fbff) !important;
+    border:1px solid #dbeafe;
+    border-radius:16px !important;
+}
+
+/* Cards */
+.card{
+    border-radius:16px !important;
+    border:1px solid #e2e8f0 !important;
+    box-shadow:0 5px 18px #00000012 !important;
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px #00000018 !important;
+}
+
+/* Dashboard numbers */
+.card h2,
+.card h3{
+    color:#172033;
+}
+
+/* Buttons */
+button{
+    border-radius:10px !important;
+    font-weight:600;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+/* Section boxes */
+#dashboard section,
+#dashboard .section{
+    background:white;
+    border-radius:18px;
+    box-shadow:0 5px 20px #00000010;
+}
+
+/* Expiring Soon */
+#expiringSoon{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 5px 20px #00000010;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .container{
+        padding:15px !important;
+    }
+
+    header{
+        padding:18px 15px !important;
+    }
+
+    header h1{
+        font-size:23px;
+    }
+
+    .card{
+        margin-bottom:12px;
+    }
+}
     </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
