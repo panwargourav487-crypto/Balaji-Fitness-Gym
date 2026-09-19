@@ -406,6 +406,9 @@ function saveData(){
     document.getElementById("loginBox").style.display = "none";
     document.querySelector(".container").style.display = "block";
 
+    await loadMembers();
+    updateDashboard();
+
     alert("✅ Admin Login Successful!");
 }
     async function adminLogout(){
@@ -848,8 +851,7 @@ document.getElementById("pendingFees").innerText=pendingFees;
     }
 }
 
-updateDashboard();
-    loadMembers();
+
     </script>
 
 </body>
