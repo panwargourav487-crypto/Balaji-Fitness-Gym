@@ -182,6 +182,53 @@ th{background:#f1f5f9}
     th,td{padding:8px}
 }
 </style>
+    /* GYM PHOTO SLIDESHOW */
+
+.gym-slideshow{
+    width:100%;
+    height:420px;
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px #0003;
+}
+
+.gym-slide{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.gym-slide.active{
+    display:block;
+}
+
+.slideshow-title{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:25px;
+    background:linear-gradient(transparent,#000b);
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    z-index:2;
+}
+
+@media(max-width:600px){
+    .gym-slideshow{
+        height:240px;
+        border-radius:15px;
+    }
+
+    .slideshow-title{
+        font-size:20px;
+        padding:18px;
+    }
+}
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
 const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
@@ -218,6 +265,30 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 </header>
 
 <div class="container" style="display:none;">
+    <!-- GYM PHOTO SLIDESHOW -->
+
+<div class="gym-slideshow">
+
+    <img src="Gemini_Generated_Image_1.png"
+         class="gym-slide active">
+
+    <img src="Gemini_Generated_Image_2.png"
+         class="gym-slide">
+
+    <img src="Gemini_Generated_Image_3.png"
+         class="gym-slide">
+
+    <img src="Gemini_Generated_Image_4.png"
+         class="gym-slide">
+
+    <img src="Gemini_Generated_Image_5.png"
+         class="gym-slide">
+
+    <div class="slideshow-title">
+        🏋️ Bala Ji Fitness Gym
+    </div>
+
+</div>
 
 <!-- DASHBOARD -->
 <div id="dashboard">
@@ -844,6 +915,22 @@ document.getElementById("pendingFees").innerText=pendingFees;
 
 updateDashboard();
     loadMembers();
+    let gymSlides = document.querySelectorAll(".gym-slide");
+let gymSlideIndex = 0;
+
+setInterval(function(){
+
+    gymSlides[gymSlideIndex].classList.remove("active");
+
+    gymSlideIndex++;
+
+    if(gymSlideIndex >= gymSlides.length){
+        gymSlideIndex = 0;
+    }
+
+    gymSlides[gymSlideIndex].classList.add("active");
+
+},3000);
 
 </script>
 
