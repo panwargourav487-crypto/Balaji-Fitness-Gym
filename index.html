@@ -336,51 +336,141 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 </header>
 
 <div class="container" style="display:none;">
-    <!-- DASHBOARD -->
+<!-- DASHBOARD -->
 <div id="dashboard">
 
+    <div class="dashboard-welcome">
+        <div>
+            <h2>Good Morning, Admin 👋</h2>
+            <p>Here's what's happening in your gym today.</p>
+        </div>
+
+        <div class="dashboard-date">
+            📅 Today
+        </div>
+    </div>
+
+
+    <!-- STAT CARDS -->
     <div class="cards">
 
-        <div class="card">
-            <h3>Total Members</h3>
-            <strong id="totalMembers">0</strong>
+        <div class="card stat-card blue-card">
+            <div class="stat-icon">👥</div>
+            <div>
+                <h3>Total Members</h3>
+                <strong id="totalMembers">0</strong>
+                <p>All registered members</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Active Members</h3>
-            <strong id="activeMembers">0</strong>
+
+        <div class="card stat-card green-card">
+            <div class="stat-icon">✅</div>
+            <div>
+                <h3>Active Members</h3>
+                <strong id="activeMembers">0</strong>
+                <p>Currently active</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Expired Members</h3>
-            <strong id="expiredMembers">0</strong>
+
+        <div class="card stat-card red-card">
+            <div class="stat-icon">⚠️</div>
+            <div>
+                <h3>Expired Members</h3>
+                <strong id="expiredMembers">0</strong>
+                <p>Membership expired</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Today's Fees</h3>
-            <strong>₹<span id="todayFees">0</span></strong>
+
+        <div class="card stat-card orange-card">
+            <div class="stat-icon">💰</div>
+            <div>
+                <h3>Today's Fees</h3>
+                <strong>₹<span id="todayFees">0</span></strong>
+                <p>Collected today</p>
+            </div>
         </div>
-        <div class="card">
-    <h3>Pending Fees</h3>
-    <strong>₹<span id="pendingFees">0</span></strong>
+
+
+        <div class="card stat-card purple-card">
+            <div class="stat-icon">⏳</div>
+            <div>
+                <h3>Pending Fees</h3>
+                <strong>₹<span id="pendingFees">0</span></strong>
+                <p>Payment pending</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <div class="dashboard-section">
+
+        <div class="section-heading">
+            <h2>⚡ Quick Actions</h2>
+            <p>Manage your gym quickly</p>
+        </div>
+
+        <div class="quick-actions">
+
+            <button class="action-btn add-action" onclick="showAdd()">
+                <span>➕</span>
+                <div>
+                    <b>Add Member</b>
+                    <small>Add a new gym member</small>
+                </div>
+            </button>
+
+
+            <button class="action-btn member-action" onclick="showMembers()">
+                <span>👥</span>
+                <div>
+                    <b>Members</b>
+                    <small>View all members</small>
+                </div>
+            </button>
+
+
+            <button class="action-btn backup-action" onclick="exportData()">
+                <span>💾</span>
+                <div>
+                    <b>Backup</b>
+                    <small>Download gym data</small>
+                </div>
+            </button>
+
+
+            <button class="action-btn logout-action" onclick="adminLogout()">
+                <span>🚪</span>
+                <div>
+                    <b>Logout</b>
+                    <small>Sign out from admin</small>
+                </div>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- EXPIRING SOON -->
+    <div class="dashboard-section expiring-box">
+
+        <div class="section-heading">
+            <h2>⚠️ Expiring Soon</h2>
+            <p>Members whose membership is about to expire</p>
+        </div>
+
+        <div id="expiringList">
+            No members found.
+        </div>
+
+    </div>
+
 </div>
-
-    </div>
-
-    <div class="menu">
-        <button class="primary" onclick="showAdd()">➕ Add Member</button>
-        <button class="dark" onclick="showMembers()">👥 Members</button>
-        <button class="gray" onclick="exportData()">💾 Backup</button>
-    </div>
-     <button class="dark" onclick="adminLogout()">🚪 Logout</button>
-
-    <div class="section">
-        <h2>⚠️ Expiring Soon</h2>
-        <div id="expiringList">No members found.</div>
-    </div>
-
-</div>
-
 
 <!-- ADD MEMBER -->
 <div id="addSection" class="section hidden">
