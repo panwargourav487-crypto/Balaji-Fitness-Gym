@@ -225,32 +225,7 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 </header>
 
 <div class="container" style="display:none;">
-    <!-- GYM PHOTO SLIDESHOW -->
-
-<div class="gym-slideshow">
-
-    <img src="Gemini_Generated_Image_1.png"
-         class="gym-slide active">
-
-    <img src="Gemini_Generated_Image_2.png"
-         class="gym-slide">
-
-    <img src="Gemini_Generated_Image_3.png"
-         class="gym-slide">
-
-    <img src="Gemini_Generated_Image_4.png"
-         class="gym-slide">
-
-    <img src="Gemini_Generated_Image_5.png"
-         class="gym-slide">
-
-    <div class="slideshow-title">
-        🏋️ Bala Ji Fitness Gym
-    </div>
-
-</div>
-
-<!-- DASHBOARD -->
+    <!-- DASHBOARD -->
 <div id="dashboard">
 
     <div class="cards">
@@ -875,24 +850,7 @@ document.getElementById("pendingFees").innerText=pendingFees;
 
 updateDashboard();
     loadMembers();
-    let gymSlides = document.querySelectorAll(".gym-slide");
-let gymSlideIndex = 0;
-
-setInterval(function(){
-
-    gymSlides[gymSlideIndex].classList.remove("active");
-
-    gymSlideIndex++;
-
-    if(gymSlideIndex >= gymSlides.length){
-        gymSlideIndex = 0;
-    }
-
-    gymSlides[gymSlideIndex].classList.add("active");
-
-},3000);
-
-</script>
+    </script>
 
 </body>
 </html>
