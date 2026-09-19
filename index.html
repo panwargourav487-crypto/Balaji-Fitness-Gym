@@ -339,17 +339,6 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 <!-- DASHBOARD -->
 <div id="dashboard">
 
-    <div class="dashboard-welcome">
-        <div>
-            <h2>Good Morning, Admin 👋</h2>
-            <p>Here's what's happening in your gym today.</p>
-        </div>
-
-        <div class="dashboard-date">
-            📅 Today
-        </div>
-    </div>
-
 
     <!-- STAT CARDS -->
     <div class="cards">
@@ -407,53 +396,37 @@ const SUPABASE_URL = "https://idaoxjfrqdhwnpdcxtvm.supabase.co";
 
 
     <!-- QUICK ACTIONS -->
-    <div class="dashboard-section">
+   <div class="dashboard-section">
 
-        <div class="section-heading">
-            <h2>⚡ Quick Actions</h2>
-            <p>Manage your gym quickly</p>
-        </div>
+    <div class="section-heading">
+        <h2>⚡ Quick Actions</h2>
+    </div>
 
-        <div class="quick-actions">
+    <div class="quick-actions">
 
-            <button class="action-btn add-action" onclick="showAdd()">
-                <span>➕</span>
-                <div>
-                    <b>Add Member</b>
-                    <small>Add a new gym member</small>
-                </div>
-            </button>
+        <button class="quick-card add-action" onclick="showAdd()">
+            <span>➕</span>
+            <b>Add Member</b>
+        </button>
 
+        <button class="quick-card member-action" onclick="showMembers()">
+            <span>👥</span>
+            <b>Members</b>
+        </button>
 
-            <button class="action-btn member-action" onclick="showMembers()">
-                <span>👥</span>
-                <div>
-                    <b>Members</b>
-                    <small>View all members</small>
-                </div>
-            </button>
+        <button class="quick-card backup-action" onclick="exportData()">
+            <span>💾</span>
+            <b>Backup</b>
+        </button>
 
-
-            <button class="action-btn backup-action" onclick="exportData()">
-                <span>💾</span>
-                <div>
-                    <b>Backup</b>
-                    <small>Download gym data</small>
-                </div>
-            </button>
-
-
-            <button class="action-btn logout-action" onclick="adminLogout()">
-                <span>🚪</span>
-                <div>
-                    <b>Logout</b>
-                    <small>Sign out from admin</small>
-                </div>
-            </button>
-
-        </div>
+        <button class="quick-card logout-action" onclick="adminLogout()">
+            <span>🚪</span>
+            <b>Logout</b>
+        </button>
 
     </div>
+
+</div>
 
 
     <!-- EXPIRING SOON -->
